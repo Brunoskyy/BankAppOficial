@@ -2,8 +2,10 @@ import { Button, Flex, Stack, useToast } from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Input } from "../Form/Input";
+import { Input } from "../../components/Form/Input";
 import { api } from "../../services/api";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 type SignInFormData = {
   email: string;
@@ -24,6 +26,12 @@ const signInFormSchema = yup.object().shape({
 
 function Signin() {
   const toast = useToast();
+  const navigate = useNavigate();
+
+  if (localStorage.getItem("isAuthenticated") === "true") {
+    return <Navigate replace to="/home" />;
+  }
+
   const {
     register,
     handleSubmit,
@@ -48,6 +56,7 @@ function Signin() {
       });
     } else {
       localStorage.setItem("isAuthenticated", "true");
+      return navigate("/home");
     }
   };
 

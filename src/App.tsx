@@ -1,9 +1,10 @@
-import Signin from "./Components/Login";
+import Signin from "./pages/Login";
+import Routes from "./routes";
 
 function App() {
   return (
     <>
-      <Signin />
+      <Routes />
     </>
   );
 }
