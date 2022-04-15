@@ -1,17 +1,8 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
+import Signin from "../pages/Login";
 
-type ProtectedRouteProps = {
-  children: React.ReactNode;
-  isAuthenticated: boolean;
-};
+export const ProtectedRoutes = () => {
+  const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
 
-export const ProtectedRoute = ({
-  isAuthenticated,
-  children,
-}: ProtectedRouteProps) => {
-  if (!isAuthenticated) {
-    return <Navigate replace to="/" />;
-  }
-
-  return children;
+  return isAuthenticated ? <Outlet /> : <Navigate to="/" />;
 };

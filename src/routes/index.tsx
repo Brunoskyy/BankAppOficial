@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes as RouterRoutes } from "react-router-dom";
 import { Home } from "../pages/Home";
 import Signin from "../pages/Login";
-import { ProtectedRoute } from "./ProtectedRoute";
+import { ProtectedRoutes } from "./ProtectedRoute";
 
 export default function Routes() {
   const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
@@ -11,14 +11,9 @@ export default function Routes() {
     <BrowserRouter>
       <RouterRoutes>
         <Route path="/" element={<Signin />} />
-        <Route
-          path="home"
-          element={
-            <ProtectedRoute isAuthenticated={isAuthenticated}>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/home" element={<Home />} />
+        </Route>
       </RouterRoutes>
     </BrowserRouter>
   );

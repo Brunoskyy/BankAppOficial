@@ -44,7 +44,7 @@ function Signin() {
     const response = await api.post<loginResponse>("/login", {
       data: values,
     });
-    debugger;
+
     if (response.data.statusCode !== 200) {
       toast({
         title: "Falha na autenticação.",

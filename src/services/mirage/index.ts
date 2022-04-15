@@ -22,7 +22,7 @@ export function makeServer() {
       this.post("login", (schema, request) => {
         const user = JSON.parse(request.requestBody);
         const { email, password } = user.data;
-        debugger;
+
         if (email === "admin@mail.com" && password === "123") {
           return {
             statusCode: 200,
