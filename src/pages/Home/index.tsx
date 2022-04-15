@@ -14,14 +14,32 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
+import { AxiosResponse } from "axios";
+import { useEffect } from "react";
 import {
   FaArrowCircleDown,
   FaArrowCircleUp,
   FaMoneyBillWaveAlt,
   FaWallet,
 } from "react-icons/fa";
+import { api } from "../../services/api";
+
+type Employee = {
+  name: string;
+  created_at: string;
+};
 
 export const Home = () => {
+  const fetchEmployees = async () => {
+    const response = await api.get("/employees");
+
+    console.log(response.data);
+  };
+
+  useEffect(() => {
+    fetchEmployees().catch((err) => console.log(err));
+  }, []);
+
   return (
     <Box w="full" m="0 auto" bgColor="gray.100" height="100vh">
       <Flex
