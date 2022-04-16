@@ -1,6 +1,7 @@
 import { Box, Flex, Heading } from "@chakra-ui/react";
 import { Cards } from "../../components/Cards";
 import { Header } from "../../components/Header";
+import { PaymentWizard } from "../../components/PaymentWizard";
 import { TransactionList } from "../../components/TransactionsList";
 
 export const Payment = () => {
@@ -14,7 +15,7 @@ export const Payment = () => {
         align="center"
         bgColor="gray.100"
       >
-        <Heading>Enois</Heading>
+        <PaymentWizard />
       </Flex>
     </Box>
   );
