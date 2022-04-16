@@ -6,6 +6,7 @@ import {
   Heading,
   HStack,
   Icon,
+  Spinner,
   Table,
   Tbody,
   Td,
@@ -14,8 +15,7 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import { AxiosResponse } from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   FaArrowCircleDown,
   FaArrowCircleUp,
@@ -26,18 +26,28 @@ import { api } from "../../services/api";
 
 type Employee = {
   name: string;
-  created_at: string;
+  email: string;
+};
+
+type Transaction = {
+  id: string;
+  amount: string;
+  createdAt: string;
+  employee: Employee;
 };
 
 export const Home = () => {
-  const fetchEmployees = async () => {
-    const response = await api.get("/employees");
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
 
-    console.log(response.data);
+  const fetchTransactions = async () => {
+    const response = await api.get("/transactions");
+    const { transactions } = response.data;
+
+    setTransactions(transactions);
   };
 
   useEffect(() => {
-    fetchEmployees().catch((err) => console.log(err));
+    fetchTransactions().catch((err) => console.log(err));
   }, []);
 
   return (
@@ -63,7 +73,13 @@ export const Home = () => {
           </Text>
         </Flex>
       </Flex>
-      <Flex paddingY="8" paddingX={5} flexFlow="column" align="center">
+      <Flex
+        paddingY="8"
+        paddingX={5}
+        flexFlow="column"
+        align="center"
+        bgColor="gray.100"
+      >
         <HStack spacing={10}>
           <Flex
             flexFlow="column"
@@ -136,42 +152,35 @@ export const Home = () => {
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
-                <Td>
-                  <Box>
-                    <Text fontWeight="bold">Joãozim</Text>
-                    <Text fontSize="sm" color="gray.500">
-                      email@mail.com
-                    </Text>
-                  </Box>
-                </Td>
-                <Td>R$ 1400,00</Td>
-                <Td>14/04/2022</Td>
-              </Tr>
-              <Tr>
-                <Td>
-                  <Box>
-                    <Text fontWeight="bold">Joãozim</Text>
-                    <Text fontSize="sm" color="gray.500">
-                      email@mail.com
-                    </Text>
-                  </Box>
-                </Td>
-                <Td>R$ 1400,00</Td>
-                <Td>14/04/2022</Td>
-              </Tr>
-              <Tr>
-                <Td>
-                  <Box>
-                    <Text fontWeight="bold">Joãozim</Text>
-                    <Text fontSize="sm" color="gray.500">
-                      email@mail.com
-                    </Text>
-                  </Box>
-                </Td>
-                <Td>R$ 1400,00</Td>
-                <Td>14/04/2022</Td>
-              </Tr>
+              {transactions.length
+                ? transactions.map((transaction) => (
+                    <Tr key={transaction.id}>
+                      <Td>
+                        <Box>
+                          <Text fontWeight="bold">
+                            {transaction.employee.name}
+                          </Text>
+                          <Text fontSize="sm" color="gray.500">
+                            {transaction.employee.email}
+                          </Text>
+                        </Box>
+                      </Td>
+                      <Td>
+                        {new Intl.NumberFormat("pt-BR", {
+                          style: "currency",
+                          currency: "BRL",
+                        }).format(Number(transaction.amount))}
+                      </Td>
+                      <Td>
+                        {new Intl.DateTimeFormat("pt-BR", {
+                          year: "numeric",
+                          month: "2-digit",
+                          day: "2-digit",
+                        }).format(new Date(transaction.createdAt))}
+                      </Td>
+                    </Tr>
+                  ))
+                : ""}
             </Tbody>
           </Table>
         </Box>
