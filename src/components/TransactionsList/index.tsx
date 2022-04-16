@@ -9,6 +9,8 @@ import {
   Flex,
   Spinner,
   Text,
+  Skeleton,
+  Stack,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { api } from "../../services/api";
@@ -79,9 +81,15 @@ export const TransactionList = () => {
           </Tbody>
         </Table>
       ) : (
-        <Flex justify="center">
-          <Spinner />
-        </Flex>
+        <Stack>
+          <Skeleton height="70px" />
+          <Skeleton height="40px" />
+          <Skeleton height="40px" />
+          <Skeleton height="40px" />
+          <Skeleton height="40px" />
+          <Skeleton height="40px" />
+          <Skeleton height="40px" />
+        </Stack>
       )}
     </Box>
   );
