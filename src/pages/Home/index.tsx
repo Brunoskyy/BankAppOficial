@@ -180,7 +180,7 @@ export const Home = () => {
                       </Td>
                     </Tr>
                   ))
-                : ""}
+                : null}
             </Tbody>
           </Table>
         </Box>
