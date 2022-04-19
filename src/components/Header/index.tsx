@@ -4,6 +4,11 @@ import { Link, useLocation } from "react-router-dom";
 export const Header = () => {
   const location = useLocation();
 
+  const handleSignOut = () => {
+    localStorage.removeItem("isAuthenticated");
+    window.location.reload();
+  };
+
   return (
     <Flex
       as="header"
@@ -41,7 +46,11 @@ export const Header = () => {
               <Link to="/payment">Pagamento de funcionários</Link>
             </Button>
           )}
-          <Button colorScheme="red" marginTop={[2, 0, 0]}>
+          <Button
+            colorScheme="red"
+            marginTop={[2, 0, 0]}
+            onClick={handleSignOut}
+          >
             Sair
           </Button>
         </Flex>

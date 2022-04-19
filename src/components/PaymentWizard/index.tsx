@@ -13,7 +13,16 @@ export const PaymentWizard = () => {
   };
 
   return (
-    <Box p={8} flex="1" w="1130px" bg="white" borderRadius="lg" mt="1">
+    <Box
+      p={8}
+      flex="1"
+      bg="white"
+      borderRadius="lg"
+      mt="1"
+      maxW="1130px"
+      w="100%"
+      overflow={["scroll"]}
+    >
       {step === 1 && <FirstStep />}
       {step === 2 && <SecondStep />}
       <Flex flex={1} justify="center" marginTop={10}>
