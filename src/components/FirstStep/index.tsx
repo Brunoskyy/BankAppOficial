@@ -40,18 +40,7 @@ const IndeterminateCheckbox = forwardRef(({ indeterminate, ...rest }, ref) => {
 
 export const FirstStep = () => {
   const [data, setData] = useState<Employee[]>([]);
-  const { step, setStep, setSelectedEmployees } = usePaymentWizard();
-
-  const handleNextStep = (selectedFlatRows) => {
-    const seletectedEmployees = selectedFlatRows.map((data) => data.original);
-
-    if (step === 1) {
-      setStep(step + 1);
-      setSelectedEmployees(seletectedEmployees);
-    }
-
-    console.log(seletectedEmployees);
-  };
+  const { setSelectedEmployees } = usePaymentWizard();
 
   const fetchEmployees = async () => {
     const response = await api.get("/employees");
@@ -131,6 +120,12 @@ export const FirstStep = () => {
     }
   );
 
+  useEffect(() => {
+    const filteredValues = selectedFlatRows.map((data) => data.values);
+
+    setSelectedEmployees(filteredValues);
+  }, [selectedFlatRows]);
+
   if (data.length === 0) {
     return (
       <Stack>
@@ -170,15 +165,6 @@ export const FirstStep = () => {
           })}
         </Tbody>
       </Table>
-      <Flex flex={1} justify="center" marginTop={10}>
-        <Button
-          onClick={() => {
-            handleNextStep(selectedFlatRows);
-          }}
-        >
-          Avançar
-        </Button>
-      </Flex>
     </>
   );
 };
