@@ -10,6 +10,12 @@
 
 </p>
 
+## As credenciais de Login são:
+
+# login: admin@mail.com
+
+# password: 123
+
 ## Tópicos
 
 [Sobre o BankApp](#sobre-o-bank-app)
@@ -62,8 +68,8 @@ yarn dev
 
 <br>
 
-
 ## Licença
+
 <a href="https://opensource.org/licenses/MIT">
     <img alt="License" src="https://img.shields.io/badge/license-MIT-blue?style=flat-square">
 </a>
