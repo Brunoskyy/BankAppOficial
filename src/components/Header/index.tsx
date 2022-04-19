@@ -12,7 +12,12 @@ export const Header = () => {
       paddingY="8"
       bgColor="white"
     >
-      <Flex justify="space-between" w="1130px" m="0 auto">
+      <Flex
+        justify={["center", "center", "center", "space-between"]}
+        m="0 auto"
+        w={["300px", "500px", "600px", "800px", "1130px"]}
+        flexDirection={["column", "column", "row"]}
+      >
         <Flex>
           <Text
             fontSize={["2xl", "3xl"]}
@@ -26,18 +31,20 @@ export const Header = () => {
             </Text>
           </Text>
         </Flex>
-        <HStack spacing="2">
+        <Flex direction={["column", "row"]}>
           {location.pathname === "/payment" ? (
-            <Button>
+            <Button marginRight={2}>
               <Link to="/home">Página inicial</Link>
             </Button>
           ) : (
-            <Button colorScheme="purple">
+            <Button colorScheme="purple" marginRight={[0, 2]}>
               <Link to="/payment">Pagamento de funcionários</Link>
             </Button>
           )}
-          <Button colorScheme="red">Sair</Button>
-        </HStack>
+          <Button colorScheme="red" marginTop={[2, 0, 0]}>
+            Sair
+          </Button>
+        </Flex>
       </Flex>
     </Flex>
   );

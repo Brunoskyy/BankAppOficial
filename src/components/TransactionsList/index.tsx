@@ -42,9 +42,18 @@ export const TransactionList = () => {
   }, []);
 
   return (
-    <Box p={8} flex="1" w="1130px" bg="white" borderRadius="lg" mt="10">
+    <Box
+      p={8}
+      flex="1"
+      maxW="1130px"
+      w="100%"
+      bg="white"
+      borderRadius="lg"
+      mt="10"
+      overflow="scroll"
+    >
       {transactions.length ? (
-        <Table colorScheme="blackAlpha">
+        <Table colorScheme="blackAlpha" overflow="scroll">
           <Thead>
             <Tr>
               <Th>Funcionario</Th>
